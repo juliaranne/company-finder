@@ -1,3 +1,18 @@
+To run project <br />
+`git clone https://github.com/juliaranne/company-finder.git`<br />
+`cd company-finder`<br />
+`npm install`<br />
+`npm start`<br />
+
+Project should be available at http://localhost:3000/
+
+To load json data https://www.npmjs.com/package/json-server has been used
+
+`cd company-finder/src`<br />
+`json-server --watch data/clients.json --port 5000`<br />
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
