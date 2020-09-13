@@ -16,8 +16,8 @@ class CompanyFinder extends React.Component {
 
   getCountries = () => {
     const allCountries = this.state.customers.map(item => item.Country);
-    const countryCount = allCountries.reduce(function(count, country) {
-      count[country] = (count[country] || 0) + 1;
+    const countryCount = allCountries.reduce((count, country) => {
+      count[country] = ( count[country] || 0 ) + 1;
       return count;
     }, {});
     const countries = Object.keys(countryCount).sort(function(a, b) {
@@ -28,10 +28,8 @@ class CompanyFinder extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <SelectList countries={this.getCountries()} />  
-        </header>
+      <div className="company-finder">
+        <SelectList listValues={this.getCountries()} />  
       </div>
     )
   };

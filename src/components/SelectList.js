@@ -1,5 +1,12 @@
 import React from 'react';
+import '../styles/select_list.scss';
 
-const SelectList = (props) => props.countries.map((country) => <h1>{country}</h1>)
+const SelectList = ({ listValues }) => {
+  return (
+    <ul className="company-finder__list">
+      {listValues.map((item) => <li key={item}>{item}</li>)}
+    </ul>
+  )
+}
 
 export default SelectList
