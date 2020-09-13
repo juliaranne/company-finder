@@ -1,4 +1,4 @@
-To run project
+To run project <br />
 `git clone https://github.com/juliaranne/company-finder.git`<br />
 `cd company-finder`<br />
 `npm install`<br />
