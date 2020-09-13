@@ -63,11 +63,13 @@ class CompanyFinder extends React.Component {
           name={'country'}
           handleSelection={this.updateSelectedValues}
           listValues={this.getCountries()}
+          selectedItem={this.state.selected.country}
         />
         <SelectList
           name={'city'}
           handleSelection={this.updateSelectedValues}
           listValues={this.getCitiesInCountry(this.state.selected.country)}
+          selectedItem={this.state.selected.city}
         />  
       </div>
     )
