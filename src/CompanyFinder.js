@@ -11,6 +11,7 @@ class CompanyFinder extends React.Component {
       country: '',
       city: '',
       company: '',
+      mapLocation: '',
     },
   }
 
@@ -62,6 +63,16 @@ class CompanyFinder extends React.Component {
     return companies;
   }
 
+  getLocation = async (company) => {
+    let location = {};
+    const selectedCompany = this.state.clients.filter(item => item.CompanyName === company);
+    if (selectedCompany.length) {
+      location = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${selectedCompany[0].Address},+${selectedCompany[0].City}&key=AIzaSyC_4SXHxINkcPGkC1Q1VHZY6z2WwtgPym4`);
+      return location.data.results[0].geometry.location;
+    }
+    return false;
+  }
+
   render() {
     return (
       <div className="company-finder">
@@ -90,7 +101,9 @@ class CompanyFinder extends React.Component {
             listValues={this.getCompaniesInCity(this.state.selected.city)}
             selectedItem={this.state.selected.company}
           />
-          <Map />
+          <div className="company-finder__map">
+            <Map getLocation={this.getLocation(this.state.selected.company)} />
+          </div>
         </div>
       </div>
     )
