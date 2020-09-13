@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './styles/company_finder.scss';
 
 function App() {
   return (
