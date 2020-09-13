@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './styles/company_finder.scss';
 import SelectList from './components/SelectList';
+import Map from './components/Map';
 
 class CompanyFinder extends React.Component {
   state = {
@@ -21,13 +22,13 @@ class CompanyFinder extends React.Component {
           country: response.data[0].Country,
           city: response.data[0].City,
           company: response.data[0].CompanyName
-        }
+        },
       }))
       .catch((error) => console.log(error));
   }
 
   updateSelectedValues = (listName, value) => {
-    this.setState({
+    return this.setState({
       selected: {
         ...this.state.selected,
         [listName]: value
@@ -54,23 +55,43 @@ class CompanyFinder extends React.Component {
     const allCities = this.state.clients.filter(client => client.Country === country).map(item => item.City);
     const cities = this.sortByOccurance(allCities);
     return cities;
-  } 
+  }
+  
+  getCompaniesInCity = (city) => {
+    const companies = this.state.clients.filter(client => client.City === city).map(item => item.CompanyName)
+    return companies;
+  }
 
   render() {
     return (
       <div className="company-finder">
-        <SelectList
-          name={'country'}
-          handleSelection={this.updateSelectedValues}
-          listValues={this.getCountries()}
-          selectedItem={this.state.selected.country}
-        />
-        <SelectList
-          name={'city'}
-          handleSelection={this.updateSelectedValues}
-          listValues={this.getCitiesInCountry(this.state.selected.country)}
-          selectedItem={this.state.selected.city}
-        />  
+        <div className="company-finder__headings">
+          <h2 className="company-finder__heading">Countries</h2>
+          <h2 className="company-finder__heading">Cities</h2>
+          <h2 className="company-finder__heading">Company</h2>
+          <h2 className="company-finder__heading">Map</h2>
+        </div>
+        <div className="company-finder__fields">
+          <SelectList
+            name={'country'}
+            handleSelection={this.updateSelectedValues}
+            listValues={this.getCountries()}
+            selectedItem={this.state.selected.country}
+          />
+          <SelectList
+            name={'city'}
+            handleSelection={this.updateSelectedValues}
+            listValues={this.getCitiesInCountry(this.state.selected.country)}
+            selectedItem={this.state.selected.city}
+          />
+          <SelectList
+            name={'company'}
+            handleSelection={this.updateSelectedValues}
+            listValues={this.getCompaniesInCity(this.state.selected.city)}
+            selectedItem={this.state.selected.company}
+          />
+          <Map />
+        </div>
       </div>
     )
   };
