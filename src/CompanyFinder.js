@@ -35,28 +35,25 @@ class CompanyFinder extends React.Component {
     })
   }
 
-  getCountries = () => {
-    const allCountries = this.state.clients.map(item => item.Country);
-    const countryCount = allCountries.reduce((count, country) => {
-      count[country] = ( count[country] || 0 ) + 1;
+  sortByOccurance = (values) => {
+    const occurance = values.reduce((count, value) => {
+      count[value] = ( count[value] || 0 ) + 1;
       return count;
     }, {});
-    const countries = Object.keys(countryCount).sort(function(a, b) {
-      return countryCount[b] - countryCount[a];
-    });
+    const sortedArray = Object.keys(occurance).sort((a, b) => occurance[b] - occurance[a]);
+    return sortedArray;
+  }
+
+  getCountries = () => {
+    const allCountries = this.state.clients.map(item => item.Country);
+    const countries = this.sortByOccurance(allCountries);
     return countries;
   }
 
-  getCities = (country) => {
-    const cities = this.state.clients.filter(client => client.Country === country).map(item => item.City);
-    const cityCount = cities.reduce((count, country) => {
-      count[country] = ( count[country] || 0 ) + 1;
-      return count;
-    }, {});
-    const popularCities = Object.keys(cityCount).sort(function(a, b) {
-      return cityCount[b] - cityCount[a];
-    });
-    return popularCities;
+  getCitiesInCountry = (country) => {
+    const allCities = this.state.clients.filter(client => client.Country === country).map(item => item.City);
+    const cities = this.sortByOccurance(allCities);
+    return cities;
   } 
 
   render() {
@@ -70,7 +67,7 @@ class CompanyFinder extends React.Component {
         <SelectList
           name={'city'}
           handleSelection={this.updateSelectedValues}
-          listValues={this.getCities(this.state.selected.country)}
+          listValues={this.getCitiesInCountry(this.state.selected.country)}
         />  
       </div>
     )
