@@ -15,9 +15,15 @@ class CompanyFinder extends React.Component {
   }
 
   getCountries = () => {
-    const customerData = this.state.customers.map(item => item.Country);
-    console.log(customerData);
-    return customerData;
+    const allCountries = this.state.customers.map(item => item.Country);
+    const countryCount = allCountries.reduce(function(count, country) {
+      count[country] = (count[country] || 0) + 1;
+      return count;
+    }, {});
+    const countries = Object.keys(countryCount).sort(function(a, b) {
+      return countryCount[b] - countryCount[a];
+    });
+    return countries;
   }
 
   render() {
