@@ -1,15 +1,15 @@
 To run project
-`git clone https://github.com/juliaranne/company-finder.git`
-`cd company-finder`
-`npm install`
-`npm start`
+`git clone https://github.com/juliaranne/company-finder.git`<br />
+`cd company-finder`<br />
+`npm install`<br />
+`npm start`<br />
 
 Project should be available at http://localhost:3000/
 
 To load json data https://www.npmjs.com/package/json-server has been used
 
-`cd company-finder/src`
-`json-server --watch data/clients.json --port 5000`
+`cd company-finder/src`<br />
+`json-server --watch data/clients.json --port 5000`<br />
 
 
 
