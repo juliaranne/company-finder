@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/select_list.scss';
 
-const SelectList = ({ listValues }) => {
+const SelectList = ({ listValues, name, handleSelection }) => {
   return (
     <ul className="company-finder__list">
-      {listValues.map((item) => <li key={item}>{item}</li>)}
+      {listValues.map((item) => <li onClick={() => handleSelection(name, item)} key={item}>{item}</li>)}
     </ul>
   )
 }
